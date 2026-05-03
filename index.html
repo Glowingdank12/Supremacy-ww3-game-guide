@@ -1,12 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CON WW3 Beast Coach</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/App.jsx"></script>
-  </body>
+<head>
+  <title>CON WW3 Beast Coach</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0b1020;
+      color: white;
+      padding: 20px;
+    }
+    input {
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    .bar {
+      height: 20px;
+      background: #111;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .fill {
+      height: 100%;
+      background: lime;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>CON WW3 Beast Coach</h1>
+
+<h2>Day 1–7 Plan</h2>
+<p>Day 1: Build Arms Industry everywhere</p>
+<p>Day 2: Expand and build Army Base</p>
+<p>Day 3: Start Air or Artillery</p>
+<p>Day 4+: Snowball and dominate</p>
+
+<h2>Beast Meter</h2>
+<div class="bar"><div id="fill" class="fill"></div></div>
+<p id="score">0/100</p>
+
+<h3>Stats</h3>
+<input id="economy" type="number" value="25"> Economy<br>
+<input id="air" type="number" value="20"> Air<br>
+<input id="activity" type="number" value="30"> Activity<br>
+<input id="wars" type="number" value="1"> Wars<br>
+
+<script>
+function update() {
+  let economy = +document.getElementById("economy").value;
+  let air = +document.getElementById("air").value;
+  let activity = +document.getElementById("activity").value;
+  let wars = +document.getElementById("wars").value;
+
+  let score = Math.max(0, Math.min(100, economy*2 + air*2 + activity*2 - wars*15));
+
+  document.getElementById("fill").style.width = score + "%";
+  document.getElementById("score").innerText = score + "/100";
+}
+
+document.querySelectorAll("input").forEach(i => i.oninput = update);
+update();
+</script>
+
+</body>
 </html>
